@@ -1,0 +1,46 @@
+﻿@model MVC_Layout.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+    <div class="container mt-3">
+        <h2 class="text-info">Create New Product</h2>
+        <form method="post" action="/Product/Create">
+            <div class="mb-3 mt-3">
+                <label>Product ID:</label>
+                <input type="text" class="form-control" name="ProductID" id="ProducID" />
+                <br />
+                <label>Product Name:</label>
+                <input type="text" class="form-control" name="ProductName" id="ProductName" />
+                <br />
+                <label>Price:</label>
+                <input type="text" class="form-control" name="Price" id="Price" />
+                <br />
+                <label>Date of Purchase:</label>
+                <input type="date" class="form-control" name="DateOfPurchase" id="DateOfPurchase" />
+                <br />
+                <label>Availability:</label>
+                <select name="AvailabilityStatus" id="AvailabilityStatus" class="form-select">
+                    <option value="InStock">In Stock</option>
+                    <option value="OutOfStock">Out of Stock</option>
+                </select>
+                <br />
+                <label>Category ID:</label>
+                <input type="text" class="form-control" name="CategoryID" id="CategoryID" />
+                <br />
+                <label>Brand ID:</label>
+                <input type="text" class="form-control" name="BrandID" id="BrandID" />
+                <br />
+                <label>Active:</label>
+                <select name="Active" id="Active" class="form-select">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <br />
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="/Product/Index" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
