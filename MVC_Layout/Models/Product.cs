@@ -22,6 +22,7 @@ namespace MVC_Layout.Models
         public Nullable<long> CategoryID { get; set; }
         public Nullable<long> BrandID { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<int> Preference { get; set; }
     
         public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }

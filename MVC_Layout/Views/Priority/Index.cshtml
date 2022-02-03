@@ -1,0 +1,89 @@
+﻿@model List<MVC_Layout.Models.test>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+            table th {
+                background-color: #F7F7F7;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                width: 100px;
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+        .selected {
+            background-color: #666;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#tb").sortable({
+                items: 'tr:not(tr:first-child)',
+                cursor: 'pointer',
+                axis: 'y',
+                dropOnEmpty: false,
+                start: function (e, ui) {
+                    ui.item.addClass("selected");
+                },
+                stop: function (e, ui) {
+                    ui.item.removeClass("selected");
+                },
+                receive: function (e, ui) {
+                    $(this).find("tbody").append(ui.item);
+                }
+            });
+        });
+    </script>
+    @using (Html.BeginForm("Index", "Priority", FormMethod.Post))
+    {
+        <table id="tb" cellpadding="0" cellspacing="0" border="1">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Priority</th>
+            </tr>
+            @foreach (var test in Model)
+            {
+                <tr>
+                    <td>
+                        @test.hid
+                        <input type="hidden" name="id" value="@test.hid" />
+                    </td>
+                    <td>@test.hn</td>
+                    <td>@test.py</td>
+                </tr>
+            }
+        </table>
+        <br />
+        <input type="submit" value="Update Preference" />
+    }
+</body>
+</html>

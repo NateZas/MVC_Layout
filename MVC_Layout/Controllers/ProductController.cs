@@ -15,7 +15,7 @@ namespace MVC_Layout.Controllers
         {
             _context = new ECommerceEntities();
         }
-        public ActionResult Index(string search ="")
+        public ActionResult Index(string search = "")
         {
             //var product = _context.Products.ToList();
             ViewBag.search = search;

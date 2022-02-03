@@ -28,5 +28,6 @@ namespace MVC_Layout.Models
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<test> tests { get; set; }
     }
 }

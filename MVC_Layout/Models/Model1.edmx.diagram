@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="ECommerceModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="ECommerceModel.FK__Products__BrandI__15502E78" ManuallyRouted="false" />
         <AssociationConnector Association="ECommerceModel.FK__Products__Catego__145C0A3F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ECommerceModel.test" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
