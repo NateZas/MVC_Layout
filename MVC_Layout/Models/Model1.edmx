@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ECommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ECommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brands">
           <Key>
             <PropertyRef Name="BrandID" />
@@ -31,8 +31,17 @@
           <Property Name="CategoryID" Type="bigint" />
           <Property Name="BrandID" Type="bigint" />
           <Property Name="Active" Type="bit" />
+          <Property Name="Preference" Type="int" />
         </EntityType>
-        <Association Name="FK__Products__BrandI__15502E78">
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="hid" />
+          </Key>
+          <Property Name="hid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hn" Type="varchar" MaxLength="10" />
+          <Property Name="py" Type="int" />
+        </EntityType>
+        <Association Name="FK__Products__BrandI__2C3393D0">
           <End Role="Brands" Type="Self.Brands" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -44,7 +53,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Catego__145C0A3F">
+        <Association Name="FK__Products__Catego__2B3F6F97">
           <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -60,17 +69,17 @@
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Products__BrandI__15502E78" Association="Self.FK__Products__BrandI__15502E78">
+          <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Products__BrandI__2C3393D0" Association="Self.FK__Products__BrandI__2C3393D0">
             <End Role="Brands" EntitySet="Brands" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Catego__145C0A3F" Association="Self.FK__Products__Catego__145C0A3F">
+          <AssociationSet Name="FK__Products__Catego__2B3F6F97" Association="Self.FK__Products__Catego__2B3F6F97">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ECommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -104,6 +113,7 @@
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Brand" Relationship="Self.FK__Products__BrandI__15502E78" FromRole="Products" ToRole="Brands" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__145C0A3F" FromRole="Products" ToRole="Categories" />
+          <Property Name="Preference" Type="Int32" />
         </EntityType>
         <Association Name="FK__Products__BrandI__15502E78">
           <End Role="Brands" Type="Self.Brand" Multiplicity="0..1" />
@@ -141,7 +151,16 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="tests" EntityType="ECommerceModel.test" />
         </EntityContainer>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="hid" />
+          </Key>
+          <Property Name="hid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hn" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="py" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -167,6 +186,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ECommerceModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Preference" ColumnName="Preference" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -175,6 +195,15 @@
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="BrandID" ColumnName="BrandID" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tests">
+            <EntityTypeMapping TypeName="ECommerceModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="py" ColumnName="py" />
+                <ScalarProperty Name="hn" ColumnName="hn" />
+                <ScalarProperty Name="hid" ColumnName="hid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
